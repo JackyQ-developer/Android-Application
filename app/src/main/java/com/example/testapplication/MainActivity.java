@@ -3,14 +3,12 @@ package com.example.testapplication;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class mainActivity extends AppCompatActivity {
     final int REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
 
         Button goLinearButton = (Button) this.findViewById(R.id.goLinear);
-        bindingBtn(goLinearButton, DetailActivity.class);
+        bindingBtn(goLinearButton, detailActivity.class);
         Button goRelativeButton = (Button) this.findViewById(R.id.goRelative);
-        bindingBtn(goRelativeButton, RelativeLayout.class);
+        bindingBtn(goRelativeButton, relativeLayout.class);
     }
 
     @Override
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, targetActivity);
+                Intent intent = new Intent(mainActivity.this, targetActivity);
                 Bundle myBundle = new Bundle();
                 myBundle.putString("author", "JackyQ");
                 intent.putExtras(myBundle);

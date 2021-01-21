@@ -8,9 +8,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import org.json.JSONObject;
 
-import java.util.HashMap;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.util.Map;
 
 import retrofit2.Call;
@@ -19,7 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RelativeLayout extends AppCompatActivity implements View.OnClickListener {
+public class relativeLayout extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +48,26 @@ public class RelativeLayout extends AppCompatActivity implements View.OnClickLis
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String link = "http://192.168.3.76:7001/login";
-        Map<String, String> body = new HashMap<>();
-        body.put("username", username);
-        body.put("password", password);
-        JSONObject jsonObject = new JSONObject(body);
+
+        JsonObject data = new JsonObject();
+        data.addProperty("username", username);
+        data.addProperty("password", password);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.3.76:7001")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        UserService service = retrofit.create(UserService.class);
-        service.login(jsonObject).enqueue(new Callback<JSONObject>() {
+        userService service = retrofit.create(userService.class);
+        service.login(data).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.i("AjaxResult: ", response.toString());
+                Gson gson = new Gson();
+                Map map = gson.fromJson(response.body(), Map.class);
             }
 
             @Override
-            public void onFailure(Call<JSONObject> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Log.e("Error: ", t.getMessage());
             }
         });
