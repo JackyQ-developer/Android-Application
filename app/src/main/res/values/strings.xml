@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Test Application</string>
+    <string name="red">red</string>
+    <string name="yellow">yellow</string>
+    <string name="green">green</string>
+    <string name="blue">blue</string>
+    <string name="row1">row one</string>
+    <string name="row2">row two</string>
+    <string name="row3">row three</string>
+    <string name="row4">row four</string>
+    <string name="username_text">用户名</string>
+    <string name="password_text">密码</string>
+    <string name="img_description">图像</string>
+    <string name="login_button_text">登录</string>
+    <string name="username_input_placeholder">请输入用户名</string>
+    <string name="password_input_placeholder">请输入密码</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>
