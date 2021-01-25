@@ -9,16 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
+
+import com.example.testapplication.api.userService;
 import com.google.gson.JsonObject;
 
-import java.util.Map;
+import rx.functions.Action1;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class relativeLayout extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,25 +48,28 @@ public class relativeLayout extends AppCompatActivity implements View.OnClickLis
         JsonObject data = new JsonObject();
         data.addProperty("username", username);
         data.addProperty("password", password);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.3.76:7001")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        userService service = retrofit.create(userService.class);
-        service.login(data).enqueue(new Callback<JsonObject>() {
+        userService service = new userService();
+        service.login(data).subscribe(new Action1<Object>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.i("AjaxResult: ", response.toString());
-                Gson gson = new Gson();
-                Map map = gson.fromJson(response.body(), Map.class);
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.e("Error: ", t.getMessage());
+            public void call(Object o) {
+                System.out.print(o);
             }
         });
+
+//        userService service = RetrofitServiceManager.getInstance().create(userService.class);
+//        service.login(data).enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                Log.i("AjaxResult: ", response.toString());
+//                Gson gson = new Gson();
+//                Map map = gson.fromJson(response.body(), Map.class);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Log.e("Error: ", t.getMessage());
+//            }
+//        });
     }
 
     @Override

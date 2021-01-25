@@ -1,4 +1,4 @@
-package com.example.testapplication.http;
+package utils.http;
 
 import com.example.testapplication.config.ApiConfig;
 
@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitServiceManager {
@@ -21,14 +21,13 @@ public class RetrofitServiceManager {
         // 添加公共参数拦截器
         HttpCommonInterceptor commonInterceptor = new HttpCommonInterceptor.Builder()
                 .addHeaderParams("paltform","android")
-                .addHeaderParams("userToken","1234343434dfdfd3434")
-                .addHeaderParams("userId","123445")
+                .addHeaderParams("token", ApiConfig.token)
                 .build();
         builder.addInterceptor(commonInterceptor);
         // 创建Retrofit
         mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(ApiConfig.BASE_URL)
                 .build();
