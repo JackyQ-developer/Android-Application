@@ -8,11 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.stetho.Stetho;
+
 public class mainActivity extends AppCompatActivity {
     final int REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_main);
 
 //        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
@@ -25,6 +28,8 @@ public class mainActivity extends AppCompatActivity {
         bindingBtn(goLinearButton, detailActivity.class);
         Button goRelativeButton = (Button) this.findViewById(R.id.goRelative);
         bindingBtn(goRelativeButton, relativeLayout.class);
+        Button goListButton = (Button) this.findViewById(R.id.goList);
+        bindingBtn(goListButton, ListActivity.class);
     }
 
     @Override

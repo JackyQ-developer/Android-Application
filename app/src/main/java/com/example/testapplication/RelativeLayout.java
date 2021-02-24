@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.example.testapplication.api.userService;
@@ -52,7 +53,15 @@ public class relativeLayout extends AppCompatActivity implements View.OnClickLis
         service.login(data).subscribe(new Action1<Object>() {
             @Override
             public void call(Object o) {
+                System.out.println("Result: ===");
                 System.out.print(o);
+                relativeLayout.this.finish();
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Log.e("TAG","error message:"+throwable.getMessage());
+                Toast.makeText(relativeLayout.this,"Error: "+throwable.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

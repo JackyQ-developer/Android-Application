@@ -1,6 +1,8 @@
 package utils.http;
 
+import com.example.testapplication.BuildConfig;
 import com.example.testapplication.config.ApiConfig;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +20,7 @@ public class RetrofitServiceManager {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIME_OUT, TimeUnit.SECONDS);//连接超时时间        builder.writeTimeout(DEFAULT_READ_TIME_OUT,TimeUnit.SECONDS);//写操作 超时时间
         builder.readTimeout(DEFAULT_READ_TIME_OUT,TimeUnit.SECONDS);//读操作超时时间
+        if (BuildConfig.DEBUG) builder.addNetworkInterceptor(new StethoInterceptor());//添加网络监控
         // 添加公共参数拦截器
         HttpCommonInterceptor commonInterceptor = new HttpCommonInterceptor.Builder()
                 .addHeaderParams("paltform","android")
